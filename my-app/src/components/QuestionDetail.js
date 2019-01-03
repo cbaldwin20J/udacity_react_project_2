@@ -8,7 +8,7 @@ class QuestionDetail extends Component {
 
   render() {
 
-  	if (!this.props.loggedIn) {
+  	if (!this.props.activeUser) {
       return <Redirect to='/sign_in' />
     }
 
@@ -23,5 +23,5 @@ class QuestionDetail extends Component {
 
 
 export default connect((state) => ({
-  loggedIn: state.loggedIn
+  activeUser: state.activeUser
 }))(QuestionDetail)

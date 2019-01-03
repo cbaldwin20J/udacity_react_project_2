@@ -8,7 +8,7 @@ class Home extends Component {
 
   render() {
 
-  	if (!this.props.loggedIn) {
+  	if (!this.props.activeUser) {
       return <Redirect to='/sign_in' />
     }
 
@@ -22,5 +22,5 @@ class Home extends Component {
 
 
 export default connect((state) => ({
-  loggedIn: state.loggedIn
+  activeUser: state.activeUser
 }))(Home)

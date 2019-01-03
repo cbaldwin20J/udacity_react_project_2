@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
-import loggedIn from './loggedIn'
+import activeUser from './activeUser'
 import questions from './initialQuestions'
 import users from './initialUsers'
 
 
 // loadingBarReducer is an npm package.
 export default combineReducers({
-  loggedIn,
+  activeUser,
   questions,
   users
 
