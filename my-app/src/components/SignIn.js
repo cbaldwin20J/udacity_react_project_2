@@ -8,19 +8,21 @@ import { activeUser } from '../actions/activeUser'
 class SignIn extends Component {
 
   state = {
-    canSubmit: "false"
+    user_name: "false"
   }
 
-  handleChange = () => {
+  handleChange = (e) => {
+    console.log("The e: " + e.target.value)
+    let updated_value = e.target.value
     this.setState(() => ({
-      canSubmit: this.menu.value
+      user_name: updated_value
     }))
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("The e value: " + this.menu.value)
-    this.props.dispatch(activeUser(this.menu.value ))
+    console.log("The e value: " + this.state.user_name)
+    this.props.dispatch(activeUser(this.state.user_name ))
   }
 
   render() {
@@ -34,8 +36,8 @@ class SignIn extends Component {
       <div>
         <label for="user-select">Pick a user to sign in as:</label>
 
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange}>
-        <select id="user-select" ref = {(input)=> this.menu = input}>
+        <form onSubmit={this.handleSubmit} >
+        <select id="user-select" onChange={this.handleChange}>
           <option value="" disabled selected>--Please choose an option--</option>
 
           {Object.keys(this.props.users).map((user) => (
@@ -47,7 +49,7 @@ class SignIn extends Component {
           <option value="volvo">Volvo</option>
 
         </select>
-        <button type="submit" disabled={this.state.canSubmit === 'false'}>Log In</button>
+        <button type="submit" disabled={this.state.user_name === 'false'}>Log In</button>
 
         </form>
       </div>
