@@ -11,10 +11,22 @@ class SignIn extends Component {
   	if (this.props.loggedIn) {
       return <Redirect to='/' />
     }
+    console.log("user props: " + this.props.users)
 
     return (
       <div>
-        The sign in component
+        <h1>Pick a user to sign in as</h1>
+        <select name="userSignIn" >
+
+          {Object.keys(this.props.users).map((user) => (
+            <option key={this.props.users[user]['id']}>
+              {user}
+              {console.log('user key id: ' + this.props.users[user]['id'])}
+            </option>
+          ))}
+          <option value="volvo">Volvo</option>
+
+        </select>
       </div>
     )
   }
@@ -23,5 +35,6 @@ class SignIn extends Component {
 
 
 export default connect((state) => ({
-  loggedIn: state.loggedIn
+  loggedIn: state.loggedIn,
+  users: state.users
 }))(SignIn)
