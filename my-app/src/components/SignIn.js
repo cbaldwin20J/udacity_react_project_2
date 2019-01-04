@@ -41,8 +41,8 @@ class SignIn extends Component {
           <option value="" disabled selected>--Please choose an option--</option>
 
           {Object.keys(this.props.users).map((user) => (
-            <option key={this.props.users[user]['id']} value={user} ref={(input) => this.textInput = input}>
-              {user}
+            <option key={this.props.users[user]['id']} value={this.props.users[user]['name']} >
+              {this.props.users[user]['name']}
               {console.log('user key id: ' + this.props.users[user]['id'])}
             </option>
           ))}

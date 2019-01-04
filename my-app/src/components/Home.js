@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import { logOut } from '../actions/activeUser'
 
 
 
 class Home extends Component {
+
+  signOut = () => {
+    this.props.dispatch(logOut())
+  }
 
   render() {
 
@@ -14,6 +19,8 @@ class Home extends Component {
 
     return (
       <div>
+        <p><button onClick={this.signOut}>Sign Out</button></p>
+        <p><strong>Current User: </strong> {this.props.activeUser}</p>
         The home component
       </div>
     )
