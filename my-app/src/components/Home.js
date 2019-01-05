@@ -23,6 +23,12 @@ class Home extends Component {
     }))
   }
 
+  viewPoll = () => {
+
+    this.props.history.push('/foo')
+
+  }
+
   render() {
 
   	if (!this.props.activeUser) {
@@ -32,16 +38,18 @@ class Home extends Component {
     return (
       <div>
         <p><button onClick={this.signOut}>Sign Out</button></p>
-        <p><strong>Current User: </strong> {this.props.activeUser}</p>
-        <button onClick={() => this.toggle_answered_questions(false)}>Unanswered Questions</button>
-        <button onClick={() => this.toggle_answered_questions(true)}>Answered Questions</button>
+        <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
+
+        <button disabled={ this.state.answered_questions ? false: true } onClick={() => this.toggle_answered_questions(false)}>Unanswered Questions</button>
+        <button disabled={ this.state.answered_questions ? true: false } onClick={() => this.toggle_answered_questions(true)}>Answered Questions</button>
         {Object.keys(this.props.questions).map((question) => (
-          <div>
-          {this.props.questions[question].author} asks:
-          <form>
-            <input type="radio"/> {this.props.questions[question]["optionOne"]["text"]}
-            <input type="radio"/> {this.props.questions[question]["optionTwo"]["text"]}
-          </form>
+          <div key={this.props.questions[question]['id']}>
+          {this.props.questions[question].author} asks, would you rather...
+
+            {this.props.questions[question]["optionOne"]["text"]}
+            <button onClick={() => this.props.history.push('/questions/'+ this.props.questions[question]['id'])} >View Poll</button>
+
+
           <p></p>
           </div>
         ))}

@@ -19,10 +19,14 @@ class SignIn extends Component {
     }))
   }
 
+
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log("The e value: " + this.state.user_name)
-    this.props.dispatch(activeUser(this.state.user_name ))
+    console.log("the state user_name: " + this.state.user_name)
+    let values = Object.values(this.props.users)
+    let value = values.filter(v => v.id == this.state.user_name)
+    console.log("the value: " + JSON.stringify(value[0]))
+    this.props.dispatch(activeUser(value[0] ))
   }
 
   render() {
@@ -30,7 +34,7 @@ class SignIn extends Component {
   	if (this.props.activeUser) {
       return <Redirect to='/' />
     }
-    console.log("user props: " + this.props.users)
+    console.log("user props: " + JSON.stringify(this.props.users))
 
     return (
       <div>
@@ -41,7 +45,8 @@ class SignIn extends Component {
           <option value="" disabled selected>--Please choose an option--</option>
 
           {Object.keys(this.props.users).map((user) => (
-            <option key={this.props.users[user]['id']} value={this.props.users[user]['name']} >
+
+            <option key={this.props.users[user]['id']} value={this.props.users[user]['id']} >
               {this.props.users[user]['name']}
               {console.log('user key id: ' + this.props.users[user]['id'])}
             </option>
