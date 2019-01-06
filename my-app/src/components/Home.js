@@ -8,18 +8,28 @@ import { logOut } from '../actions/activeUser'
 class Home extends Component {
 
   state = {
-    answered_questions: false
+    show_answered: false,
+    already_answered_questions: []
   }
+
+  componentDidMount(){
+    if(this.props.activeUser.answers){
+    let answered_questions = Object.keys(this.props.activeUser.answers)
+    console.log('answered_questions: ' + answered_questions)
+    this.setState(() => ({
+      already_answered_questions: answered_questions
+    }))
+    }
+  }
+
 
   signOut = () => {
     this.props.dispatch(logOut())
   }
 
-  toggle_answered_questions = (answered) => {
-    console.log("answered parameter: " + answered)
-
+  toggle_show_answered = (answered) => {
     this.setState(() => ({
-      answered_questions: answered
+      show_answered: answered
     }))
   }
 
@@ -34,15 +44,18 @@ class Home extends Component {
   	if (!this.props.activeUser) {
       return <Redirect to='/sign_in' />
     }
-    console.log("the answered state: " + this.state.answered_questions)
+    console.log("state already answered: " + this.state.already_answered_questions );
     return (
       <div>
         <p><button onClick={this.signOut}>Sign Out</button></p>
         <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
 
-        <button disabled={ this.state.answered_questions ? false: true } onClick={() => this.toggle_answered_questions(false)}>Unanswered Questions</button>
-        <button disabled={ this.state.answered_questions ? true: false } onClick={() => this.toggle_answered_questions(true)}>Answered Questions</button>
-        {Object.keys(this.props.questions).map((question) => (
+        <button disabled={ this.state.show_answered ? false: true } onClick={() => this.toggle_show_answered(false)}>Unanswered Questions</button>
+        <button disabled={ this.state.show_answered ? true: false } onClick={() => this.toggle_show_answered(true)}>Answered Questions</button>
+
+        {this.state.show_answered ?
+
+        Object.keys(this.props.questions).filter(question => this.state.already_answered_questions.includes(question)).map((question) => (
           <div key={this.props.questions[question]['id']}>
           {this.props.questions[question].author} asks, would you rather...
 
@@ -52,7 +65,31 @@ class Home extends Component {
 
           <p></p>
           </div>
-        ))}
+        ))
+        :
+
+        Object.keys(this.props.questions).filter(question => !this.state.already_answered_questions.includes(question)).map((question) => (
+          <div key={this.props.questions[question]['id']}>
+          {this.props.questions[question].author} asks, would you rather...
+
+            {this.props.questions[question]["optionOne"]["text"]}
+            <button onClick={() => this.props.history.push('/questions/'+ this.props.questions[question]['id'])} >View Poll</button>
+
+
+          <p></p>
+          </div>
+        ))
+
+        }
+
+
+
+
+
+
+
+
+
       </div>
     )
   }
