@@ -53,6 +53,7 @@ class Home extends Component {
         <button disabled={ this.state.show_answered ? false: true } onClick={() => this.toggle_show_answered(false)}>Unanswered Questions</button>
         <button disabled={ this.state.show_answered ? true: false } onClick={() => this.toggle_show_answered(true)}>Answered Questions</button>
 
+        <h2>{this.state.show_answered ? 'Answered Questions' : 'Unanswered Questions'}</h2>
         {this.state.show_answered ?
 
         Object.keys(this.props.questions).filter(question => this.state.already_answered_questions.includes(question)).map((question) => (
