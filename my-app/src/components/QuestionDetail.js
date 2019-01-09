@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { logOut } from '../actions/activeUser'
+import { Redirect, withRouter, Switch } from 'react-router-dom'
+import { logOut, activeUser } from '../actions/activeUser'
+import { saveAnswer } from '../actions/saveQuestionAnswer'
 
 
 
@@ -10,7 +11,8 @@ class QuestionDetail extends Component {
 
   state = {
     question_object: null,
-    selectedOption: null
+    selectedOption: null,
+    redirect: false
   }
 
   componentDidMount() {
@@ -30,6 +32,29 @@ class QuestionDetail extends Component {
   });
 }
 
+
+
+
+
+  saveAnswer = () => {
+    let users_answer = this.state.selectedOption
+    let question_id = this.state.question_object.id
+    let user_id = this.props.activeUser.id
+    this.props.dispatch(saveAnswer(user_id, question_id, users_answer ))
+    .then(() => {
+      let values = Object.values(this.props.users)
+      let value = values.filter(v => v.id == this.props.activeUser.id)
+      console.log("alskdjfalkdsjfalsdkfj: " + value[0])
+      this.props.dispatch(activeUser(value[0] ))
+  })
+    .then(() => {
+      this.setState(() => ({
+        redirect: true
+      }))
+    })
+
+  }
+
   signOut = () => {
     this.props.dispatch(logOut())
   }
@@ -38,6 +63,8 @@ class QuestionDetail extends Component {
 
   	if (!this.props.activeUser) {
       return <Redirect to='/sign_in' />
+    }else if(this.state.redirect){
+      return <Redirect to='/' />
     }
 
     console.log("the params: " + this.props.match.params.question_id)
@@ -50,10 +77,10 @@ class QuestionDetail extends Component {
         <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
         <p></p>
         <div onChange={this.handleChange}>
-          <input type="radio" name="the_answer" value="option1" checked={this.state.selectedOption === 'option1'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionOne"]["text"]}
-          <input type="radio" name="the_answer" value="option2" checked={this.state.selectedOption === 'option2'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionTwo"]["text"]}
+          <input type="radio" name="the_answer" value="optionOne" checked={this.state.selectedOption === 'optionOne'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionOne"]["text"]}
+          <input type="radio" name="the_answer" value="optionTwo" checked={this.state.selectedOption === 'optionTwo'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionTwo"]["text"]}
         </div>
-        <button>Save</button>
+        <button onClick={this.saveAnswer} disabled={!this.state.selectedOption} >Save</button>
 
 
 
@@ -67,7 +94,16 @@ class QuestionDetail extends Component {
 
 
 
-export default connect((state) => ({
+export default withRouter(connect((state) => ({
   activeUser: state.activeUser,
-  questions:state.questions
-}))(QuestionDetail)
+  questions:state.questions,
+  users: state.users
+}))(QuestionDetail))
+
+
+//
+// to save an updated answer you need the question id, and an 'answers' array
+// on the user using x = 'Object.keys(user.answers)'
+
+// if the question id is in the 'x' then you need to do users[user].answers[question_id] = new_answer ('optionOne'/'optionTwo')
+// then go to the questions[question]optionOne and questions[question].optionTwo, clear both
