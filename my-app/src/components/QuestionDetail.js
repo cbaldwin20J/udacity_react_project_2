@@ -72,7 +72,7 @@ class QuestionDetail extends Component {
   	if (!this.props.activeUser) {
       return <Redirect to='/sign_in' />
     }else if(this.state.redirect){
-      return <Redirect to='/' />
+      this.props.history.push('/poll_results/'+ this.props.match.params.question_id)
     }
 
     console.log("the params: " + this.props.match.params.question_id)
