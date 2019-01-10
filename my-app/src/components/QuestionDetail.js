@@ -20,8 +20,16 @@ class QuestionDetail extends Component {
     console.log("questionArray: " + questionsArray)
     const questionObject = questionsArray.filter(q => q.id == this.props.match.params.question_id)
     console.log("questionObject: " + JSON.stringify(questionObject[0]))
+    let if_pre_answered = null
+    if(questionObject[0].optionOne.votes.includes(this.props.activeUser.id)){
+      if_pre_answered = "optionOne"
+    }else if(questionObject[0].optionTwo.votes.includes(this.props.activeUser.id)){
+      if_pre_answered = "optionTwo"
+    }
+
     this.setState(() => ({
-      question_object: questionObject[0]
+      question_object: questionObject[0],
+      selectedOption: if_pre_answered
     }))
   }
 
