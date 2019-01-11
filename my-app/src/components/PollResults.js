@@ -10,6 +10,8 @@ import { saveAnswer } from '../actions/saveQuestionAnswer'
 class PollResults extends Component {
 
   state = {
+    option_one_length: null,
+    option_two_length: null,
     optionOnePercent: null,
     optionTwoPercent: null,
     question_object: null
@@ -30,6 +32,8 @@ class PollResults extends Component {
     const optionTwoPercentage = optionTwoLength / (optionOneLength + optionTwoLength)
 
     this.setState(() => ({
+      option_one_length: optionOneLength,
+      option_two_length: optionTwoLength,
       optionOnePercent: optionOnePercentage,
       optionTwoPercent: optionTwoPercentage,
       question_object: questionObject[0]
@@ -42,7 +46,7 @@ class PollResults extends Component {
   }
 
   render() {
-
+      console.log("the pollResults state: " + JSON.stringify(this.state))
   	if (!this.props.activeUser) {
       return <Redirect to='/sign_in' />
     }
@@ -53,11 +57,23 @@ class PollResults extends Component {
         <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
         <p></p>
 
+        {this.state.question_object ?
         <div>
+          <h3>Added by {this.props.users[this.state.question_object.author].name}</h3>
           <h2>Results....</h2>
-          <p>1 {this.state.question_object && this.state.question_object.optionOne.text}</p>
-          <p>2 {this.state.question_object && this.state.question_object.optionTwo.text}</p>
+
+          <p>{this.state.question_object.optionOne.text}</p>
+          <p> {this.state.option_one_length} out of {this.state.option_one_length + this.state.option_two_length}: {((this.state.option_one_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} % </p>
+          <p></p>
+          <p></p>
+          <p>{this.state.question_object && this.state.question_object.optionTwo.text}</p>
+          <p> {this.state.option_two_length} out of {this.state.option_one_length + this.state.option_two_length}: {((this.state.option_two_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} %  </p>
         </div>
+          :
+        <div>
+          <p>...</p>
+        </div>
+        }
 
 
       </div>
@@ -69,5 +85,6 @@ class PollResults extends Component {
 
 export default withRouter(connect((state) => ({
   activeUser: state.activeUser,
-  questions:state.questions
+  questions:state.questions,
+  users:state.users
 }))(PollResults))
