@@ -2,7 +2,7 @@ let users = {
   sarahedo: {
     id: 'sarahedo',
     name: 'Sarah Edo',
-    avatarURL: "filler",
+    avatarURL: "https://cdn1.thr.com/sites/default/files/2012/09/rachel_a.jpg",
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionTwo',
@@ -14,7 +14,7 @@ let users = {
   tylermcginnis: {
     id: 'tylermcginnis',
     name: 'Tyler McGinnis',
-    avatarURL: "filler",
+    avatarURL: "https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/paul-newman-sunglasses-cool-thomas-pollart.jpg",
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -24,7 +24,7 @@ let users = {
   johndoe: {
     id: 'johndoe',
     name: 'John Doe',
-    avatarURL: "filler",
+    avatarURL: "https://i.pinimg.com/236x/80/18/c5/8018c521cf8889738ce0298770dd2276--fight-club-brad-pitt.jpg",
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',

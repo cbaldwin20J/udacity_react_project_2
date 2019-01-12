@@ -14,7 +14,8 @@ class PollResults extends Component {
     option_two_length: null,
     optionOnePercent: null,
     optionTwoPercent: null,
-    question_object: null
+    question_object: null,
+    activeUserAnswer: null
   }
 
   componentDidMount() {
@@ -31,43 +32,42 @@ class PollResults extends Component {
     const optionOnePercentage = optionOneLength / (optionOneLength + optionTwoLength)
     const optionTwoPercentage = optionTwoLength / (optionOneLength + optionTwoLength)
 
+    const active_user_answer = this.props.activeUser.answers[questionObject[0].id]
+
+
     this.setState(() => ({
       option_one_length: optionOneLength,
       option_two_length: optionTwoLength,
       optionOnePercent: optionOnePercentage,
       optionTwoPercent: optionTwoPercentage,
-      question_object: questionObject[0]
+      question_object: questionObject[0],
+      activeUserAnswer: active_user_answer
     }))
   }
 
 
-  signOut = () => {
-    this.props.dispatch(logOut())
-  }
 
   render() {
       console.log("the pollResults state: " + JSON.stringify(this.state))
-  	if (!this.props.activeUser) {
-      return <Redirect to='/sign_in' />
-    }
 
     return (
       <div>
-        <p><button onClick={this.signOut}>Sign Out</button></p>
-        <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
-        <p></p>
 
         {this.state.question_object ?
         <div>
-          <h3>Added by {this.props.users[this.state.question_object.author].name}</h3>
+          <p></p>
+          <img className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
+          <h3>Asked by {this.props.users[this.state.question_object.author].name}</h3>
           <h2>Results....</h2>
 
           <p>{this.state.question_object.optionOne.text}</p>
           <p> {this.state.option_one_length} out of {this.state.option_one_length + this.state.option_two_length}: {((this.state.option_one_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} % </p>
+          {this.state.activeUserAnswer == "optionOne" && <p>You answered option one</p>}
           <p></p>
           <p></p>
           <p>{this.state.question_object && this.state.question_object.optionTwo.text}</p>
           <p> {this.state.option_two_length} out of {this.state.option_one_length + this.state.option_two_length}: {((this.state.option_two_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} %  </p>
+          {this.state.activeUserAnswer == "optionTwo" && <p>You answered option two</p>}
         </div>
           :
         <div>

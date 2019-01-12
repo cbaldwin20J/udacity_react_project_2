@@ -63,9 +63,7 @@ class QuestionDetail extends Component {
 
   }
 
-  signOut = () => {
-    this.props.dispatch(logOut())
-  }
+
 
   render() {
 
@@ -81,9 +79,14 @@ class QuestionDetail extends Component {
 
     return (
       <div>
-        <p><button onClick={this.signOut}>Sign Out</button></p>
-        <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
+
         <p></p>
+        {this.state.question_object &&
+        <div>
+        <img className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
+        <p>{this.props.users[this.state.question_object.author]['name']} asks...</p>
+        </div>
+      }
         <div onChange={this.handleChange}>
           <input type="radio" name="the_answer" value="optionOne" checked={this.state.selectedOption === 'optionOne'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionOne"]["text"]}
           <input type="radio" name="the_answer" value="optionTwo" checked={this.state.selectedOption === 'optionTwo'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionTwo"]["text"]}

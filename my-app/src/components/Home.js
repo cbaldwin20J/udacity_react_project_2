@@ -33,22 +33,14 @@ class Home extends Component {
     }))
   }
 
-  viewPoll = () => {
 
-    this.props.history.push('/foo')
-
-  }
 
   render() {
 
-  	if (!this.props.activeUser) {
-      return <Redirect to='/sign_in' />
-    }
     console.log("this component's state: " + JSON.stringify(this.state))
     return (
       <div>
-        <p><button onClick={this.signOut}>Sign Out</button></p>
-        <p><strong>Current User: </strong> {this.props.activeUser['name']}</p>
+
 
         <button disabled={ this.state.show_answered ? false: true } onClick={() => this.toggle_show_answered(false)}>Unanswered Questions</button>
         <button disabled={ this.state.show_answered ? true: false } onClick={() => this.toggle_show_answered(true)}>Answered Questions</button>
@@ -58,6 +50,7 @@ class Home extends Component {
 
         Object.keys(this.props.questions).filter(question => this.state.already_answered_questions.includes(question) === true).map((the_question) => (
           <div key={this.props.questions[the_question]['id']}>
+          <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
           {this.props.questions[the_question].author} asks, would you rather...
 
             {this.props.questions[the_question]["optionOne"]["text"]}
@@ -71,6 +64,8 @@ class Home extends Component {
 
         Object.keys(this.props.questions).filter(question => this.state.already_answered_questions.includes(question) === false).map((the_question) => (
           <div key={this.props.questions[the_question]['id']}>
+          <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
+
           {this.props.questions[the_question].author} asksssss, would you rather...
 
             {this.props.questions[the_question]["optionOne"]["text"]}
@@ -99,5 +94,6 @@ class Home extends Component {
 
 export default connect((state) => ({
   activeUser: state.activeUser,
-  questions: state.questions
+  questions: state.questions,
+  users: state.users
 }))(Home)
