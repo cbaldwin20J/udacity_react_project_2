@@ -4,7 +4,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import {saveQuestion} from '../actions/saveQuestion'
 
 
@@ -59,12 +59,12 @@ class NewQuestion extends Component {
       	<h1 className="titleContainer">Complete the question...</h1>
       	<p></p>
       	<h2 className="h2Container">Would you rather...</h2>
-      	<label for="op_1">Option 1: </label>
+      	<label htmlFor="op_1">Option 1: </label>
       	<input id="op_1" type="text" value={this.state.option_one} onChange={this.option_1}/>
       	<p></p>
       	<p><strong>OR...</strong></p>
       	<p></p>
-      	<label for="op_2">Option 2: </label>
+      	<label htmlFor="op_2">Option 2: </label>
       	<input id="op_2" type="text" value={this.state.option_two} onChange={this.option_2}/>
       	<p></p>
       	<button type="submit" onClick={this.saveQuestion}>Save</button>

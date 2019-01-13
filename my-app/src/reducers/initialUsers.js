@@ -1,4 +1,4 @@
-import { INITIAL_QUESTIONS, INITIAL_USERS } from '../actions/initialData'
+import { INITIAL_USERS } from '../actions/initialData'
 import { SAVE_ANSWER } from '../actions/saveQuestionAnswer'
 import {SAVE_QUESTION} from '../actions/saveQuestion'
 

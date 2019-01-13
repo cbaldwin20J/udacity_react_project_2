@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter, Switch } from 'react-router-dom'
-import { logOut, activeUser } from '../actions/activeUser'
-import { saveAnswer } from '../actions/saveQuestionAnswer'
+import { withRouter } from 'react-router-dom'
 
 
 
@@ -60,7 +58,7 @@ class PollResults extends Component {
         {this.state.question_object ?
         <div>
           <p></p>
-          <img className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
+          <img alt="users face" className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
           <h3>Asked by {this.props.users[this.state.question_object.author].name}</h3>
           <h2>Results....</h2>
 

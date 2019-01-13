@@ -21,29 +21,29 @@ class NavMenu extends Component {
     return (
       <div className='topnav'>
 
-          <a>
+
             <NavLink to='/' exact activeClassName='active'>
             Home
             </NavLink>
-          </a>
 
-          <a>
+
+
             <NavLink to='/leaderboard' exact>
             Leader Board
             </NavLink>
-          </a>
 
-          <a>
+
+
             <NavLink to='/add' exact activeClassName='active'>
             New Question
             </NavLink>
-          </a>
 
-          <a>
+
+
             <NavLink to='#' activeClassName='active'>
             <strong>Current User: </strong> {this.props.activeUser['name']}
             </NavLink>
-          </a>
+
 
 
 

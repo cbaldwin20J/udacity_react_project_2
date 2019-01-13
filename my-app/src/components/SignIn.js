@@ -9,7 +9,7 @@ import { users } from '../utils/_DATA'
 class SignIn extends Component {
 
   state = {
-    user_name: "false"
+    user_name: ""
   }
 
   handleChange = (e) => {
@@ -42,11 +42,11 @@ class SignIn extends Component {
       <div id="signInContainer">
         {Object.keys(this.props.users).length == Object.keys(users).length?
         <div>
-        <p id="pickAUser"><label for="user-select">Pick a user to sign in as:</label></p>
+        <p id="pickAUser"><label htmlFor="user-select">Pick a user to sign in as:</label></p>
 
         <form onSubmit={this.handleSubmit} >
-        <select id="user-select" onChange={this.handleChange}>
-          <option value="" disabled selected>--Please choose an option--</option>
+        <select id="user-select" onChange={this.handleChange} value={this.state.user_name}>
+          <option value="" disabled >--Please choose an option--</option>
 
           {Object.keys(this.props.users).map((user) => (
 
@@ -58,7 +58,7 @@ class SignIn extends Component {
 
 
         </select>
-        <button id="signInButton" type="submit" disabled={this.state.user_name === 'false'}>Log In</button>
+        <button id="signInButton" type="submit" disabled={this.state.user_name === ''}>Log In</button>
 
         </form>
       </div>

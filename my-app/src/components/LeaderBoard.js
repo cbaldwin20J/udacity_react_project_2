@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import { logOut } from '../actions/activeUser'
+
 
 
 
@@ -21,7 +20,6 @@ class LeaderBoard extends Component {
       let user_ones_total = user_1_questions_length + user_1_answers_length
 
       let user_2_answers_length = Object.keys(this.props.users[user_2].answers).length
-      let user_2_questions_length = this.props.users[user_2].questions.length
       let user_twos_total = user_1_questions_length + user_2_answers_length
 
       return user_twos_total - user_ones_total
@@ -49,7 +47,7 @@ class LeaderBoard extends Component {
           this.state.user_ids_in_score_order.map((the_user) => (
           <div className="question_container" key={this.props.users[the_user]['id']}>
             <p></p>
-            <img className="thumbnail" alt="person image"src={this.props.users[the_user]['avatarURL']} />
+            <img className="thumbnail" alt="users face"src={this.props.users[the_user]['avatarURL']} />
             <p className="pollContainer">{this.props.users[the_user]['name']}</p>
             <p className="optionPollText">Answered Questions: {Object.keys(this.props.users[the_user]['answers']).length}</p>
             <p className="optionPollText">Created Questions: {this.props.users[the_user]['questions'].length}</p>

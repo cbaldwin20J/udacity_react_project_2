@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, withRouter, Switch } from 'react-router-dom'
-import { logOut, activeUser } from '../actions/activeUser'
+import { withRouter } from 'react-router-dom'
+import { activeUser } from '../actions/activeUser'
 import { saveAnswer } from '../actions/saveQuestionAnswer'
 
 
@@ -11,11 +11,12 @@ class QuestionDetail extends Component {
 
   state = {
     question_object: null,
-    selectedOption: null,
-    redirect: false
+    selectedOption: null
+
   }
 
   componentDidMount() {
+
     const questionsArray = Object.values(this.props.questions)
     console.log("questionArray: " + questionsArray)
     const questionObject = questionsArray.filter(q => q.id == this.props.match.params.question_id)
@@ -61,9 +62,9 @@ class QuestionDetail extends Component {
       this.props.dispatch(activeUser(value[0] ))
   })
     .then(() => {
-      this.setState(() => ({
-        redirect: true
-      }))
+
+      this.props.history.push('/poll_results/'+ this.props.match.params.question_id)
+
     })
 
   }
@@ -72,9 +73,7 @@ class QuestionDetail extends Component {
 
   render() {
 
-  	if(this.state.redirect){
-      this.props.history.push('/poll_results/'+ this.props.match.params.question_id)
-    }
+
 
     console.log("the params: " + this.props.match.params.question_id)
     console.log("question_object state: " + JSON.stringify(this.state.question_object))
@@ -86,7 +85,7 @@ class QuestionDetail extends Component {
         <p></p>
         {this.state.question_object &&
         <div>
-        <img className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
+        <img alt="users face" className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
         <p className="pollContainer"><strong >{this.props.users[this.state.question_object.author]['name']} asks,</strong> would you rather...</p>
         </div>
       }

@@ -3,9 +3,7 @@ import {SAVE_ANSWER} from '../actions/saveQuestionAnswer'
 import {SAVE_QUESTION} from '../actions/saveQuestion'
 
 
-const reset_votes = (user_id, votes_array) => {
 
-};
 
 export default function questions (state = {}, action) {
   switch(action.type) {

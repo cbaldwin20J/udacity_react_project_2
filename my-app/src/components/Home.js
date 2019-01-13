@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import { logOut } from '../actions/activeUser'
 
 
@@ -59,7 +58,7 @@ class Home extends Component {
 
         this.state.all_questions_ordered_by_date.filter(question => this.state.already_answered_questions.includes(question) === true).map((the_question) => (
           <div className="question_container" key={this.props.questions[the_question]['id']}>
-          <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
+          <img alt="users face" className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
           <p className="pollContainer"><strong >{this.props.users[this.props.questions[the_question].author].name} asks</strong>, would you rather...</p>
 
             <p>{this.props.questions[the_question]["optionOne"]["text"]}...</p>
@@ -74,7 +73,7 @@ class Home extends Component {
 
         this.state.all_questions_ordered_by_date.filter(question => this.state.already_answered_questions.includes(question) === false).map((the_question) => (
           <div className="question_container" key={this.props.questions[the_question]['id']}>
-          <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
+          <img alt="users face" className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
 
           <p className="pollContainer"><strong>{this.props.users[this.props.questions[the_question].author].name} asks</strong>, would you rather...</p>
 

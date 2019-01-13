@@ -14,9 +14,7 @@ export function saveQuestion(question) {
   return (dispatch) => {
 
 
-    const optionOneText = question.optionOneText;
-    const optionTwoText = question.optionTwoText;
-    const author = question.author;
+
 
     return _saveQuestion(question)
       .then((the_question) => dispatch(saveQuestionActionObject(the_question)))
