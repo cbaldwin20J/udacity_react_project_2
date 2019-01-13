@@ -78,21 +78,23 @@ class QuestionDetail extends Component {
     console.log("selectedOption state: " + this.state.selectedOption)
 
     return (
-      <div>
+      <div className="pageContainer question_container">
 
         <p></p>
         {this.state.question_object &&
         <div>
         <img className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
-        <p>{this.props.users[this.state.question_object.author]['name']} asks...</p>
+        <p><strong className="pollContainer">{this.props.users[this.state.question_object.author]['name']} asks...</strong></p>
         </div>
       }
-        <div onChange={this.handleChange}>
-          <input type="radio" name="the_answer" value="optionOne" checked={this.state.selectedOption === 'optionOne'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionOne"]["text"]}
-          <input type="radio" name="the_answer" value="optionTwo" checked={this.state.selectedOption === 'optionTwo'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionTwo"]["text"]}
-        </div>
-        <button onClick={this.saveAnswer} disabled={!this.state.selectedOption} >Save</button>
 
+        <div className="giveMargin" onChange={this.handleChange}>
+          <span className="questionInputs"> <input type="radio" name="the_answer" value="optionOne" checked={this.state.selectedOption === 'optionOne'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionOne"]["text"]}</span>
+          <span className="questionInputs"><input className="optionPollText" type="radio" name="the_answer" value="optionTwo" checked={this.state.selectedOption === 'optionTwo'} onChange={this.handleOptionChange}/>{this.state.question_object && this.state.question_object["optionTwo"]["text"]}</span>
+        </div>
+        <p></p>
+        <button onClick={this.saveAnswer} disabled={!this.state.selectedOption} >Save</button>
+        <p></p>
 
 
 

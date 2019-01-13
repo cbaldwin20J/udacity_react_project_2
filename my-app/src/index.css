@@ -43,4 +43,126 @@ code {
 
 .thumbnail{
 	width: 300px;
+  margin-top: 10px;
+  border-style: dotted;
+}
+
+div.question_container{
+  background: green;
+  border-style: solid;
+  margin-bottom: 10px;
+  width: 50%;
+
+  text-align: center;
+}
+
+div.pageContainer{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#answeredOrNot{
+  border-style: solid;
+  background: orange;
+  width: 40%;
+  padding: 10px;
+
+}
+
+.optionPollText{
+  border-style: solid;
+  background: orange;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.pollContainer{
+  border-style: solid;
+  background: lightblue;
+  padding: 5px;
+}
+
+.star{
+  font-size: 34px;
+  background: yellow;
+}
+
+.score{
+  border-style: solid;
+  background: red;
+  width: 50%;
+  margin-left: 25%;
+  padding: 5px;
+}
+
+#newQuestionContainer{
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.titleContainer{
+  border-style: solid;
+  background: lightblue;
+  width: 30%;
+  padding: 5px;
+}
+
+.h2Container{
+  border-style: solid;
+  background: orange;
+  padding: 5px;
+  width: 20%;
+}
+
+#buttonFloat{
+  float:right;
+  margin-right: 10%;
+  padding: 14px 16px;
+  margin-top: 15px;
+}
+
+.addSpace{
+  margin-right: 20px;
+  padding: 20px;
+  font-size: 16px;
+}
+
+#signInContainer{
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#pickAUser{
+  margin-top: 15px;
+  border-style: solid;
+  background: orange;
+  width: 40%;
+  padding: 10px;
+  font-size: 25px;
+}
+
+#user-select{
+  width: 300px;
+  margin-right: 10px;
+  font-size: 20px
+}
+
+#signInButton{
+  padding: 10px 39px;
+  font-size: 22px;
+}
+
+.questionInputs{
+  border-style: solid;
+  background: orange;
+
+  padding: 5px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.giveMargin{
+  margin-top: 30px;
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { activeUser } from '../actions/activeUser'
+import { users } from '../utils/_DATA'
 
 
 
@@ -37,8 +38,11 @@ class SignIn extends Component {
     console.log("user props: " + JSON.stringify(this.props.users))
 
     return (
-      <div>
-        <label for="user-select">Pick a user to sign in as:</label>
+
+      <div id="signInContainer">
+        {Object.keys(this.props.users).length == Object.keys(users).length?
+        <div>
+        <p id="pickAUser"><label for="user-select">Pick a user to sign in as:</label></p>
 
         <form onSubmit={this.handleSubmit} >
         <select id="user-select" onChange={this.handleChange}>
@@ -51,12 +55,16 @@ class SignIn extends Component {
               {console.log('user key id: ' + this.props.users[user]['id'])}
             </option>
           ))}
-          <option value="volvo">Volvo</option>
+
 
         </select>
-        <button type="submit" disabled={this.state.user_name === 'false'}>Log In</button>
+        <button id="signInButton" type="submit" disabled={this.state.user_name === 'false'}>Log In</button>
 
         </form>
+      </div>
+      :
+      <h1>Loading...</h1>
+      }
       </div>
     )
   }

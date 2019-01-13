@@ -48,22 +48,23 @@ class Home extends Component {
 
     console.log("this component's state: " + JSON.stringify(this.state))
     return (
-      <div>
+      <div className="pageContainer">
 
 
-        <button disabled={ this.state.show_answered ? false: true } onClick={() => this.toggle_show_answered(false)}>Unanswered Questions</button>
-        <button disabled={ this.state.show_answered ? true: false } onClick={() => this.toggle_show_answered(true)}>Answered Questions</button>
+        <button className="addSpace" disabled={ this.state.show_answered ? false: true } onClick={() => this.toggle_show_answered(false)}>Unanswered Questions</button>
+        <button className="addSpace" disabled={ this.state.show_answered ? true: false } onClick={() => this.toggle_show_answered(true)}>Answered Questions</button>
 
-        <h2>{this.state.show_answered ? 'Answered Questions' : 'Unanswered Questions'}</h2>
+        <h2 id="answeredOrNot">{this.state.show_answered ? 'Answered Questions' : 'Unanswered Questions'}</h2>
         {this.state.show_answered ?
 
         this.state.all_questions_ordered_by_date.filter(question => this.state.already_answered_questions.includes(question) === true).map((the_question) => (
-          <div key={this.props.questions[the_question]['id']}>
+          <div className="question_container" key={this.props.questions[the_question]['id']}>
           <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
-          {this.props.questions[the_question].author} asks, would you rather...
+          <p className="pollContainer"><strong >{this.props.users[this.props.questions[the_question].author].name} asks</strong>, would you rather...</p>
 
-            {this.props.questions[the_question]["optionOne"]["text"]}
-            <button onClick={() => this.props.history.push('/questions/'+ this.props.questions[the_question]['id'])} >View Poll</button>
+            <p>{this.props.questions[the_question]["optionOne"]["text"]}...</p>
+
+            <p><button onClick={() => this.props.history.push('/questions/'+ this.props.questions[the_question]['id'])} >View Poll</button></p>
 
 
           <p></p>
@@ -72,13 +73,13 @@ class Home extends Component {
         :
 
         this.state.all_questions_ordered_by_date.filter(question => this.state.already_answered_questions.includes(question) === false).map((the_question) => (
-          <div key={this.props.questions[the_question]['id']}>
+          <div className="question_container" key={this.props.questions[the_question]['id']}>
           <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
 
-          {this.props.questions[the_question].author} asksssss, would you rather...
+          <p className="pollContainer"><strong>{this.props.users[this.props.questions[the_question].author].name} asks</strong>, would you rather...</p>
 
-            {this.props.questions[the_question]["optionOne"]["text"]}
-            <button onClick={() => this.props.history.push('/questions/'+ this.props.questions[the_question]['id'])} >View Poll</button>
+            <p>{this.props.questions[the_question]["optionOne"]["text"]}...</p>
+            <p><button onClick={() => this.props.history.push('/questions/'+ this.props.questions[the_question]['id'])} >View Poll</button></p>
 
 
           <p></p>

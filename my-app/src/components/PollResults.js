@@ -51,7 +51,7 @@ class PollResults extends Component {
       console.log("the pollResults state: " + JSON.stringify(this.state))
 
     return (
-      <div>
+      <div className="pageContainer question_container">
 
         {this.state.question_object ?
         <div>
@@ -60,14 +60,18 @@ class PollResults extends Component {
           <h3>Asked by {this.props.users[this.state.question_object.author].name}</h3>
           <h2>Results....</h2>
 
-          <p>{this.state.question_object.optionOne.text}</p>
-          <p> {this.state.option_one_length} out of {this.state.option_one_length + this.state.option_two_length}: {((this.state.option_one_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} % </p>
-          {this.state.activeUserAnswer == "optionOne" && <p>You answered option one</p>}
+          <div className="pollContainer">
+          <p className="optionPollText">{this.state.question_object.optionOne.text}</p>
+          <p> {this.state.option_one_length} out of {this.state.option_one_length + this.state.option_two_length}: <strong>{((this.state.option_one_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} %</strong> </p>
+          {this.state.activeUserAnswer == "optionOne" && <p><span className="star">&#9734;</span> You answered option one</p>}
           <p></p>
           <p></p>
-          <p>{this.state.question_object && this.state.question_object.optionTwo.text}</p>
-          <p> {this.state.option_two_length} out of {this.state.option_one_length + this.state.option_two_length}: {((this.state.option_two_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} %  </p>
-          {this.state.activeUserAnswer == "optionTwo" && <p>You answered option two</p>}
+          </div>
+          <div className="pollContainer">
+          <p className="optionPollText">{this.state.question_object && this.state.question_object.optionTwo.text}</p>
+          <p> {this.state.option_two_length} out of {this.state.option_one_length + this.state.option_two_length}: <strong>{((this.state.option_two_length /(this.state.option_one_length + this.state.option_two_length)) * 100).toFixed(2)} %</strong>  </p>
+          {this.state.activeUserAnswer == "optionTwo" && <p><span className="star">&#9734;</span> You answered option two</p>}
+          </div>
         </div>
           :
         <div>

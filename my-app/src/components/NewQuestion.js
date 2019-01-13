@@ -54,15 +54,15 @@ class NewQuestion extends Component {
 
 
     return (
-      <div>
+      <div id="newQuestionContainer">
       	<p></p>
-      	<p>Complete the question...</p>
+      	<h1 className="titleContainer">Complete the question...</h1>
       	<p></p>
-      	<p>Would you rather...</p>
+      	<h2 className="h2Container">Would you rather...</h2>
       	<label for="op_1">Option 1: </label>
       	<input id="op_1" type="text" value={this.state.option_one} onChange={this.option_1}/>
       	<p></p>
-      	<p>OR...</p>
+      	<p><strong>OR...</strong></p>
       	<p></p>
       	<label for="op_2">Option 2: </label>
       	<input id="op_2" type="text" value={this.state.option_two} onChange={this.option_2}/>

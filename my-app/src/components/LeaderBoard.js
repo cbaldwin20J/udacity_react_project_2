@@ -43,17 +43,17 @@ class LeaderBoard extends Component {
   render() {
 
     return (
-      <div>
+      <div className="pageContainer">
 
         {this.state.user_ids_in_score_order &&
           this.state.user_ids_in_score_order.map((the_user) => (
-          <div key={this.props.users[the_user]['id']}>
+          <div className="question_container" key={this.props.users[the_user]['id']}>
             <p></p>
             <img className="thumbnail" alt="person image"src={this.props.users[the_user]['avatarURL']} />
-            <p>{this.props.users[the_user]['name']}</p>
-            <p>Answered Questions: {Object.keys(this.props.users[the_user]['answers']).length}</p>
-            <p>Created Questions: {this.props.users[the_user]['questions'].length}</p>
-            <p>Score: {(Object.keys(this.props.users[the_user]['answers']).length) + (this.props.users[the_user]['questions'].length)}</p>
+            <p className="pollContainer">{this.props.users[the_user]['name']}</p>
+            <p className="optionPollText">Answered Questions: {Object.keys(this.props.users[the_user]['answers']).length}</p>
+            <p className="optionPollText">Created Questions: {this.props.users[the_user]['questions'].length}</p>
+            <p className="score"><span className="star">&#9734;</span> <strong>Score: {(Object.keys(this.props.users[the_user]['answers']).length) + (this.props.users[the_user]['questions'].length)}</strong></p>
           <p></p>
           </div>
         ))

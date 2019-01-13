@@ -39,9 +39,14 @@ class NavMenu extends Component {
             </NavLink>
           </a>
 
+          <a>
+            <NavLink to='#' activeClassName='active'>
+            <strong>Current User: </strong> {this.props.activeUser['name']}
+            </NavLink>
+          </a>
 
-        <a><strong>Current User: </strong> {this.props.activeUser['name']}</a>
-        <button onClick={this.signOut}>Sign Out</button>
+
+        <button id="buttonFloat" onClick={this.signOut}>Sign Out</button>
 
       </div>
     )
