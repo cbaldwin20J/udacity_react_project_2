@@ -26,6 +26,10 @@ class PollResults extends Component {
     const questionObject = questionsArray.filter(q => q.id == this.props.match.params.question_id)
     console.log("questionObject: " + JSON.stringify(questionObject[0]))
 
+
+    if (!questionObject[0]){
+      this.props.history.push('/404')
+    }
     const optionOneLength = questionObject[0].optionOne.votes.length
     const optionTwoLength = questionObject[0].optionTwo.votes.length
 

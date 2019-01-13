@@ -28,13 +28,13 @@ class NavMenu extends Component {
           </a>
 
           <a>
-            <NavLink to='/leader_board' exact>
+            <NavLink to='/leaderboard' exact>
             Leader Board
             </NavLink>
           </a>
 
           <a>
-            <NavLink to='/new_question' exact activeClassName='active'>
+            <NavLink to='/add' exact activeClassName='active'>
             New Question
             </NavLink>
           </a>
@@ -44,6 +44,7 @@ class NavMenu extends Component {
             <strong>Current User: </strong> {this.props.activeUser['name']}
             </NavLink>
           </a>
+
 
 
         <button id="buttonFloat" onClick={this.signOut}>Sign Out</button>

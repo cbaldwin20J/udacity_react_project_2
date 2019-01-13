@@ -20,6 +20,7 @@ class QuestionDetail extends Component {
     console.log("questionArray: " + questionsArray)
     const questionObject = questionsArray.filter(q => q.id == this.props.match.params.question_id)
     console.log("questionObject: " + JSON.stringify(questionObject[0]))
+
     let if_pre_answered = null
     if(questionObject[0].optionOne.votes.includes(this.props.activeUser.id)){
       if_pre_answered = "optionOne"
@@ -27,9 +28,13 @@ class QuestionDetail extends Component {
       if_pre_answered = "optionTwo"
     }
 
+    if (!questionObject[0]){
+      this.props.history.push('/404')
+    }
+
     this.setState(() => ({
       question_object: questionObject[0],
-      selectedOption: if_pre_answered
+      selectedOption: if_pre_answered,
     }))
   }
 
@@ -67,9 +72,7 @@ class QuestionDetail extends Component {
 
   render() {
 
-  	if (!this.props.activeUser) {
-      return <Redirect to='/sign_in' />
-    }else if(this.state.redirect){
+  	if(this.state.redirect){
       this.props.history.push('/poll_results/'+ this.props.match.params.question_id)
     }
 
@@ -84,7 +87,7 @@ class QuestionDetail extends Component {
         {this.state.question_object &&
         <div>
         <img className="thumbnail" src={this.props.users[this.state.question_object.author]['avatarURL']} />
-        <p><strong className="pollContainer">{this.props.users[this.state.question_object.author]['name']} asks...</strong></p>
+        <p className="pollContainer"><strong >{this.props.users[this.state.question_object.author]['name']} asks,</strong> would you rather...</p>
         </div>
       }
 
