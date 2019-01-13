@@ -9,14 +9,23 @@ class Home extends Component {
 
   state = {
     show_answered: false,
+    all_questions_ordered_by_date: [],
     already_answered_questions: []
   }
 
   componentDidMount(){
     if(this.props.activeUser.answers){
     let answered_questions = Object.keys(this.props.activeUser.answers)
+
+    let question_ids = Object.keys(this.props.questions)
+    let ordered_questions = question_ids.sort((q1, q2) => {
+      return this.props.questions[q2].timestamp - this.props.questions[q1].timestamp
+    })
+
+
     this.setState(() => ({
-      already_answered_questions: answered_questions
+      already_answered_questions: answered_questions,
+      all_questions_ordered_by_date: ordered_questions
     }))
     }
   }
@@ -48,7 +57,7 @@ class Home extends Component {
         <h2>{this.state.show_answered ? 'Answered Questions' : 'Unanswered Questions'}</h2>
         {this.state.show_answered ?
 
-        Object.keys(this.props.questions).filter(question => this.state.already_answered_questions.includes(question) === true).map((the_question) => (
+        this.state.all_questions_ordered_by_date.filter(question => this.state.already_answered_questions.includes(question) === true).map((the_question) => (
           <div key={this.props.questions[the_question]['id']}>
           <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
           {this.props.questions[the_question].author} asks, would you rather...
@@ -62,7 +71,7 @@ class Home extends Component {
         ))
         :
 
-        Object.keys(this.props.questions).filter(question => this.state.already_answered_questions.includes(question) === false).map((the_question) => (
+        this.state.all_questions_ordered_by_date.filter(question => this.state.already_answered_questions.includes(question) === false).map((the_question) => (
           <div key={this.props.questions[the_question]['id']}>
           <img className="thumbnail" src={this.props.users[this.props.questions[the_question]['author']].avatarURL} />
 

@@ -33,6 +33,12 @@ class NavMenu extends Component {
             </NavLink>
           </a>
 
+          <a>
+            <NavLink to='/new_question' exact activeClassName='active'>
+            New Question
+            </NavLink>
+          </a>
+
 
         <a><strong>Current User: </strong> {this.props.activeUser['name']}</a>
         <button onClick={this.signOut}>Sign Out</button>

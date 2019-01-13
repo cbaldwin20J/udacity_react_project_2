@@ -1,5 +1,7 @@
 import { INITIAL_QUESTIONS } from '../actions/initialData'
 import {SAVE_ANSWER} from '../actions/saveQuestionAnswer'
+import {SAVE_QUESTION} from '../actions/saveQuestion'
+
 
 const reset_votes = (user_id, votes_array) => {
 
@@ -13,7 +15,7 @@ export default function questions (state = {}, action) {
         ...action.questions
       }
 
-     case SAVE_ANSWER :
+    case SAVE_ANSWER :
       const question_id = action.question_id
       const users_answer = action.users_answer
       const user_id = action.user_id
@@ -39,9 +41,19 @@ export default function questions (state = {}, action) {
           [other_option] : {
             ...state[question_id][other_option],
             'votes' :
-              [other_option_votes_array]
+              [...other_option_votes_array]
 
           }
+        }
+      }
+
+    case SAVE_QUESTION:
+      console.log("the reducer question_object: " + JSON.stringify(action.the_question_object))
+
+      return {
+        ...state,
+        [action.the_question_object.id]:{
+          ...action.the_question_object
         }
       }
 

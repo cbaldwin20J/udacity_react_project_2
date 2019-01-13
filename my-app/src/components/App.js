@@ -8,6 +8,7 @@ import PollResults from './PollResults'
 import LeaderBoard from './LeaderBoard'
 import NavMenu from './NavMenu'
 import Home from './Home'
+import NewQuestion from './NewQuestion'
 import { handleInitialQuestions, handleInitialUsers } from '../actions/initialData'
 
 
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path='/questions/:question_id' component={QuestionDetail} />
           <Route path='/poll_results/:question_id' component={PollResults} />
           <Route path='/leader_board' component={LeaderBoard} />
+          <Route path='/new_question' component={NewQuestion} />
 
         </div>
       </BrowserRouter>

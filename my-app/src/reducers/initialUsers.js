@@ -1,5 +1,7 @@
 import { INITIAL_QUESTIONS, INITIAL_USERS } from '../actions/initialData'
 import { SAVE_ANSWER } from '../actions/saveQuestionAnswer'
+import {SAVE_QUESTION} from '../actions/saveQuestion'
+
 
 
 // puts a variable 'tweets' in the state. The 'state' parameter is only for this variable
@@ -30,6 +32,17 @@ export default function users (state = {}, action) {
     	}
 
 
+    case SAVE_QUESTION :
+      return {
+        ...state,
+        [action.the_question_object.author]:{
+          ...state[action.the_question_object.author],
+          questions:[
+            ...state[action.the_question_object.author]['questions'],
+            action.the_question_object.id
+          ]
+        }
+      }
 
 
     default :

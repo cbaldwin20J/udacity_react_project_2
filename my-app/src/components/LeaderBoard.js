@@ -7,11 +7,46 @@ import { logOut } from '../actions/activeUser'
 
 class LeaderBoard extends Component {
 
+  state = {
+    user_ids_in_score_order: null
+  }
+
+  componentDidMount() {
+    let the_users = Object.keys(this.props.users)
+    console.log("*******the_users: " + the_users)
+
+    let users_final = the_users.sort((user_1, user_2) => {
+      let user_1_answers_length = Object.keys(this.props.users[user_1].answers).length
+      let user_1_questions_length = this.props.users[user_1].questions.length
+      let user_ones_total = user_1_questions_length + user_1_answers_length
+
+      let user_2_answers_length = Object.keys(this.props.users[user_2].answers).length
+      let user_2_questions_length = this.props.users[user_2].questions.length
+      let user_twos_total = user_1_questions_length + user_2_answers_length
+
+      return user_twos_total - user_ones_total
+
+    })
+
+    console.log("users_final: " + users_final)
+
+    this.setState(() => ({
+      user_ids_in_score_order: users_final
+    }))
+
+
+
+
+
+  }
+
   render() {
 
     return (
       <div>
-        {Object.keys(this.props.users).map((the_user) => (
+
+        {this.state.user_ids_in_score_order &&
+          this.state.user_ids_in_score_order.map((the_user) => (
           <div key={this.props.users[the_user]['id']}>
             <p></p>
             <img className="thumbnail" alt="person image"src={this.props.users[the_user]['avatarURL']} />
@@ -21,7 +56,8 @@ class LeaderBoard extends Component {
             <p>Score: {(Object.keys(this.props.users[the_user]['answers']).length) + (this.props.users[the_user]['questions'].length)}</p>
           <p></p>
           </div>
-        ))}
+        ))
+        }
 
 
 
