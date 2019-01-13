@@ -1,1 +1,1 @@
-Download the files to your computer. 'npm install' will install everything you need to run this project. 'npm start' will automatically open a browser window and run the project for you.
+This project is a polling app. Download the files to your computer. 'npm install' will install everything you need to run this project. 'npm start' will automatically open a browser window and run the project for you.
