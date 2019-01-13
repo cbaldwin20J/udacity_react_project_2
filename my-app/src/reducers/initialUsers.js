@@ -1,21 +1,20 @@
+// puts all of our user objects into the store's state
+
 import { INITIAL_USERS } from '../actions/initialData'
 import { SAVE_ANSWER } from '../actions/saveQuestionAnswer'
 import {SAVE_QUESTION} from '../actions/saveQuestion'
 
-
-
-// puts a variable 'tweets' in the state. The 'state' parameter is only for this variable
-// not for all the variables in the state.
 export default function users (state = {}, action) {
-
-
   switch(action.type) {
+
+    // when the user signs in, will load the users from the database into the state
     case INITIAL_USERS :
       return {
         ...state,
         ...action.users
       }
 
+    // saves the users answer to a question
     case SAVE_ANSWER :
     	const user_id = action.user_id
   		const question_id = action.question_id
@@ -31,7 +30,7 @@ export default function users (state = {}, action) {
     		}
     	}
 
-
+    // if the user creates a new question
     case SAVE_QUESTION :
       return {
         ...state,
@@ -44,11 +43,8 @@ export default function users (state = {}, action) {
         }
       }
 
-
     default :
       return state
   }
 }
 
-// users[authed_user.id].answers then add on object {question.id: “optionOne/optionTwo”}
-// users_answer, question_id, user_id

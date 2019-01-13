@@ -1,10 +1,9 @@
 import { ACTIVATE_USER, LOG_OUT } from '../actions/activeUser'
 
-
-// puts a variable 'tweets' in the state. The 'state' parameter is only for this variable
-// not for all the variables in the state.
+// sets whoever is the logged in user into our store's state as activeUser
 export default function activeUser (state = false, action) {
   switch(action.type) {
+
     case ACTIVATE_USER :
       return action.active_user
 

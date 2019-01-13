@@ -1,3 +1,5 @@
+// will console.log our store's state whenever it changes
+
 const logger = (store) => (next) => (action) => {
   console.group(action.type)
     console.log('The action: ', action)

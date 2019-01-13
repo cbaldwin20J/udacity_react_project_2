@@ -1,7 +1,9 @@
+// the main container of our app
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+// the components
 import SignIn from './SignIn'
 import QuestionDetail from './QuestionDetail'
 import PollResults from './PollResults'
@@ -10,9 +12,9 @@ import NavMenu from './NavMenu'
 import Home from './Home'
 import NewQuestion from './NewQuestion'
 import FourOFour from './404'
+// end of the components
+
 import { handleInitialQuestions, handleInitialUsers } from '../actions/initialData'
-
-
 
 
 class App extends Component {
@@ -27,6 +29,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
+
           <NavMenu />
           <Switch>
             <Route path='/' exact component={Home} />

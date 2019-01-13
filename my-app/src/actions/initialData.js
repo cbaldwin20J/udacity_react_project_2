@@ -1,10 +1,9 @@
-
 import { _getQuestions, _getUsers } from '../utils/_DATA'
 
 export const INITIAL_QUESTIONS = "INITIAL_QUESTIONS"
 export const INITIAL_USERS = "INITIAL_USERS"
 
-
+// gets the questions and puts them in the state
 function storeQuestions(questions){
   return {
     type: INITIAL_QUESTIONS,
@@ -12,7 +11,7 @@ function storeQuestions(questions){
   }
 }
 
-
+// gets questions from the database
 export function handleInitialQuestions () {
   return (dispatch) => {
     return _getQuestions()
@@ -24,7 +23,7 @@ export function handleInitialQuestions () {
 }
 
 
-
+// puts users in store's state
 function storeUsers(users){
   return {
     type: INITIAL_USERS,
@@ -32,6 +31,7 @@ function storeUsers(users){
   }
 }
 
+// gets users from database
 export function handleInitialUsers () {
   return (dispatch) => {
     return _getUsers()

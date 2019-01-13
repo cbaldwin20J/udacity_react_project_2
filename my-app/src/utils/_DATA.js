@@ -1,3 +1,5 @@
+// our temporary database
+
 export let users = {
   sarahedo: {
     id: 'sarahedo',
