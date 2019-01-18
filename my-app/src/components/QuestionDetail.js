@@ -24,16 +24,16 @@ class QuestionDetail extends Component {
     const questionObject = questionsArray.filter(q => q.id == this.props.match.params.question_id)
 
     let if_pre_answered = null
-    if(questionObject[0].optionOne.votes.includes(this.props.activeUser.id)){
-      if_pre_answered = "optionOne"
-    }else if(questionObject[0].optionTwo.votes.includes(this.props.activeUser.id)){
-      if_pre_answered = "optionTwo"
+    if(questionObject[0]){
+      if(questionObject[0].optionOne.votes.includes(this.props.activeUser.id)){
+        if_pre_answered = "optionOne"
+      }else if(questionObject[0].optionTwo.votes.includes(this.props.activeUser.id)){
+        if_pre_answered = "optionTwo"
+      }
     }
 
     // if the questionObject doesn't exist then throw the 404 page
-    if (!questionObject[0]){
-      this.props.history.push('/404')
-    }
+
 
     this.setState(() => ({
       question_object: questionObject[0],
@@ -81,6 +81,8 @@ class QuestionDetail extends Component {
 
     return (
       <div className="pageContainer question_container">
+      {this.state.question_object ?
+        <div>
         <p></p>
 
         {this.state.question_object &&
@@ -98,7 +100,12 @@ class QuestionDetail extends Component {
         <p></p>
         <button onClick={this.saveAnswer} disabled={!this.state.selectedOption} >Save</button>
         <p></p>
-
+        </div>
+        :
+          <div className="pageContainer">
+            <h1>404: poll not found</h1>
+          </div>
+        }
       </div>
     )
   }

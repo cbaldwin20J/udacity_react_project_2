@@ -11,7 +11,6 @@ import LeaderBoard from './LeaderBoard'
 import NavMenu from './NavMenu'
 import Home from './Home'
 import NewQuestion from './NewQuestion'
-import FourOFour from './404'
 // end of the components
 
 import { handleInitialQuestions, handleInitialUsers } from '../actions/initialData'
@@ -32,13 +31,12 @@ class App extends Component {
 
           <NavMenu />
           <Switch>
-            <Route path='/' exact component={Home} />
             <Route path='/sign_in' exact component={SignIn} />
+            <Route path='/' exact component={Home} />
             <Route path='/questions/:question_id' component={QuestionDetail} />
             <Route path='/poll_results/:question_id' component={PollResults} />
             <Route path='/leaderboard' component={LeaderBoard} />
             <Route path='/add' component={NewQuestion} />
-            <Route component={FourOFour} />
           </Switch>
 
         </div>

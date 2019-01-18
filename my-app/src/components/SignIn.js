@@ -37,8 +37,12 @@ class SignIn extends Component {
 
   render() {
 
+    // if user was redirected to sign in page, once signed in it will take them
+    // to the original page. Otherwise it will take them to the home page by
+    // default
   	if (this.props.activeUser) {
-      return <Redirect to='/' />
+      const { from } = this.props.location.state || { from: { pathname: '/' } }
+    return <Redirect to={from} />
     }
 
     return (

@@ -26,11 +26,8 @@ class PollResults extends Component {
     // the question object in our array that matches what was sent in the url
     const questionObject = questionsArray.filter(q => q.id == this.props.match.params.question_id)
 
-    // if the questionObject doesn't exist, then throw the 404 page
-    if (!questionObject[0]){
-      this.props.history.push('/404')
-    }
 
+    if(questionObject[0]){
     const optionOneLength = questionObject[0].optionOne.votes.length
     const optionTwoLength = questionObject[0].optionTwo.votes.length
 
@@ -47,6 +44,7 @@ class PollResults extends Component {
       question_object: questionObject[0],
       activeUserAnswer: active_user_answer
     }))
+    }
   }
 
 
@@ -81,8 +79,8 @@ class PollResults extends Component {
 
           :
 
-        <div>
-          <p>...</p>
+        <div className="pageContainer">
+          <h1>404: poll not found</h1>
         </div>
 
         }

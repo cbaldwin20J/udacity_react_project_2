@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect, NavLink } from 'react-router-dom'
+import { Redirect, NavLink, withRouter } from 'react-router-dom'
 import { logOut } from '../actions/activeUser'
 
 
@@ -13,8 +13,20 @@ class NavMenu extends Component {
   }
 
   render() {
-  	if (!this.props.activeUser) {
-      return <Redirect to='/sign_in' />
+
+  	console.log("this.props.location.pathname" + JSON.stringify(this.props.location.pathname))
+
+    // if the user is not logged in
+    if (!this.props.activeUser) {
+      // then take them to the sign in page if not already on it
+      if(this.props.location.pathname != '/sign_in'){
+        // when sending them to the sign in page, leave a trace of what page the user
+        // originally wanted to go to, so once they sign in the site will take them
+        // to that page.
+        return <Redirect to={{
+          pathname: '/sign_in',
+          state: { from: this.props.location }}}/>
+        }
     }
 
     return (
@@ -32,10 +44,11 @@ class NavMenu extends Component {
             New Question
             </NavLink>
 
+            {this.props.activeUser &&
             <NavLink to='#' activeClassName='active'>
             <strong>Current User: </strong> {this.props.activeUser['name']}
             </NavLink>
-
+            }
 
             <button id="buttonFloat" onClick={this.signOut}>Sign Out</button>
 
@@ -44,6 +57,7 @@ class NavMenu extends Component {
   }
 }
 
-export default connect((state) => ({
+
+export default withRouter(connect((state) => ({
   activeUser: state.activeUser
-}))(NavMenu)
+}))(NavMenu))

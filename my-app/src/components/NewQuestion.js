@@ -15,21 +15,12 @@ class NewQuestion extends Component {
     option_two: ''
   }
 
-  option_1 = (e) => {
-  	let option1 = e.target.value
+  option_update = (e, whichOption) => {
+  	let optionValue = e.target.value
 
   	this.setState((currentState) => ({
       ...currentState,
-      option_one: option1
-    }))
-  }
-
-  option_2 = (e) => {
-  	let option2 = e.target.value
-
-  	this.setState((currentState) => ({
-      ...currentState,
-      option_two: option2
+      [whichOption]: optionValue
     }))
   }
 
@@ -61,15 +52,15 @@ class NewQuestion extends Component {
         <h2 className="h2Container">Would you rather...</h2>
 
         <label htmlFor="op_1">Option 1: </label>
-      	<input id="op_1" type="text" value={this.state.option_one} onChange={this.option_1}/>
+      	<input id="op_1" type="text" value={this.state.option_one} onChange={(e) => this.option_update(e, "option_one")}/>
       	<p></p>
       	<p><strong>OR...</strong></p>
       	<p></p>
       	<label htmlFor="op_2">Option 2: </label>
-      	<input id="op_2" type="text" value={this.state.option_two} onChange={this.option_2}/>
+      	<input id="op_2" type="text" value={this.state.option_two} onChange={(e) => this.option_update(e, "option_two")}/>
       	<p></p>
 
-        <button type="submit" onClick={this.saveQuestion}>Save</button>
+        <button type="submit" disabled={this.state.option_one == "" || this.state.option_two == ""} onClick={this.saveQuestion}>Save</button>
       </div>
     )
   }
